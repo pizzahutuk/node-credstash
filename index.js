@@ -1,4 +1,5 @@
 const async = require('async');
+const AWS = require('aws-sdk');
 const decrypter = require('./lib/decrypter');
 const encoder = require('./lib/encoder');
 const hmac = require('./lib/hmac');
@@ -6,12 +7,17 @@ const keys = require('./lib/keys');
 const secrets = require('./lib/secrets');
 const xtend = require('xtend');
 
+if (typeof process.env.AWS_DEFAULT_REGION !== 'undefined') {
+  AWS.config.update({region: process.env.AWS_DEFAULT_REGION});
+}
+
 const defaults = {
   limit: 1
 };
 
 function Credstash(config) {
   this.table = config ? config.table : undefined;
+  this.AWS = AWS;
 }
 
 Credstash.prototype.list = function(options, done) {
