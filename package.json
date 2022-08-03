@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "aes-js": "3.1.2",
-    "async": "^3.2.1",
+    "async": "^3.2.4",
     "xtend": "4.0.2"
   },
   "peerDependencies": {
